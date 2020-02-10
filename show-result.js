@@ -1,4 +1,4 @@
-console.log('running test')
+console.log("running test");
 window.x = {
   "dynamic import with no wrap": false,
   "dynamic import with wrap": false,
@@ -8,10 +8,44 @@ window.x = {
 var thisPage, backgroundPage, contentScript;
 var isBackground = false;
 
-chrome.runtime.getBackgroundPage &&
-  chrome.runtime.getBackgroundPage(e => {
-    if (e === globalThis) isBackground = true;
+function getBackgroundPage() {
+  return new Promise(resolve => {
+    try {
+      chrome.runtime.getBackgroundPage &&
+        chrome.runtime.getBackgroundPage(resolve);
+    } catch (e) {
+      browser.runtime.getBackgroundPage &&
+        browser.runtime.getBackgroundPage.then(resolve);
+    }
   });
+}
+function get() {
+  return new Promise(resolve => {
+    try {
+      chrome.storage.local.get(resolve);
+    } catch (e) {
+      browser.storage.local.get().then(resolve);
+    }
+  });
+}
+function set(v) {
+  try {
+    chrome.storage.local.set(v);
+  } catch (e) {
+    browser.storage.local.set(v);
+  }
+}
+window.getURL = function(r) {
+  try {
+    return chrome.runtime.getURL(r);
+  } catch (e) {
+    return browser.runtime.getURL(r);
+  }
+};
+
+getBackgroundPage().then(e => {
+  if (e === globalThis) isBackground = true;
+});
 
 setInterval(() => {
   thisPage = document.getElementById("this");
@@ -22,9 +56,9 @@ setInterval(() => {
   var result = JSON.stringify(window.x, undefined, 4);
   if (thisPage.innerHTML !== result) thisPage.innerHTML = result;
   if (isBackground) {
-    chrome.storage.local.set({ result });
+    set({ result });
   } else {
-    chrome.storage.local.get(({ result, cs }) => {
+    get().then(({ result, cs }) => {
       if (result !== backgroundPage.innerHTML)
         backgroundPage.innerHTML = result;
       if (cs !== contentScript.innerHTML) contentScript.innerHTML = cs;
@@ -37,5 +71,5 @@ setInterval(() => {
 
   var result = JSON.stringify(window.x, undefined, 4);
 
-  chrome.storage.local.set({ cs: result });
+  set({ cs: result });
 }, 100);

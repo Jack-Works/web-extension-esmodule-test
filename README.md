@@ -19,4 +19,6 @@ Tracker: https://bugzilla.mozilla.org/show_bug.cgi?id=1536094
 
 ## Firefox for Android
 
+## Firefox GeckoView
+
 ## WebExtension polyfill for iOS
