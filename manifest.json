@@ -1,0 +1,30 @@
+{
+  "$schema": "http://json.schemastore.org/chrome-manifest",
+  "name": "Are ESModule in WebExtension ready yet?",
+  "version": "1.0.0",
+  "manifest_version": 2,
+  "web_accessible_resources": ["*.js"],
+  "permissions": ["<all_urls>", "storage"],
+  "background": {
+    "page": "test.html"
+  },
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": [
+        "show-result.js",
+        "esm/static-import.js",
+        "esm/import.meta.js",
+        "esm/dynamic-import-wrap.js",
+        "esm/dynamic-import-no-wrap.js"
+      ]
+    }
+  ],
+  "options_ui": {
+    "page": "test.html",
+    "open_in_tab": true
+  },
+  "browser_action": {
+    "default_popup": "test.html"
+  }
+}

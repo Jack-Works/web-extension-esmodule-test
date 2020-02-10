@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width,initial-scale=1,maximum-scale=1"
+    />
+  </head>
+  <script src="show-result.js"></script>
+  <script src="esm/static-import.js" type="module"></script>
+  <script src="esm/import.meta.js" type="module"></script>
+  <script src="esm/dynamic-import-wrap.js"></script>
+  <script src="esm/dynamic-import-no-wrap.js"></script>
+  <body>
+    <h6>
+      Note: the test suit "static import" means load a module directly without
+      dynamic import
+    </h6>
+    <h1>This page result</h1>
+    <pre id="this"></pre>
+    <h1>Background</h1>
+    <pre id="bg"></pre>
+    <h1>Content scripts</h1>
+    <pre id="cs">Please open a new normal webpage</pre>
+  </body>
+</html>
