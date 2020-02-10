@@ -1,3 +1,4 @@
+console.log('running test')
 window.x = {
   "dynamic import with no wrap": false,
   "dynamic import with wrap": false,

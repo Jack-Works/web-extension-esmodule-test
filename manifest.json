@@ -12,7 +12,12 @@
     {
       "matches": ["<all_urls>"],
       "js": [
-        "show-result.js",
+        "show-result.js"
+      ]
+    },
+    {
+      "matches": ["<all_urls>"],
+      "js": [
         "esm/static-import.js",
         "esm/import.meta.js",
         "esm/dynamic-import-wrap.js",

@@ -13,6 +13,10 @@ Tested item
 
 ## Firefox
 
+❌ Content script doesn't support ESModule at all. No workaround available.
+
+Tracker: https://bugzilla.mozilla.org/show_bug.cgi?id=1536094
+
 ## Firefox for Android
 
 ## WebExtension polyfill for iOS
