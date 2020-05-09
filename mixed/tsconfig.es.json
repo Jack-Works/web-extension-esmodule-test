@@ -1,0 +1,25 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "module": "ESNext",
+    "outDir": "./es/",
+    "tsBuildInfoFile": "./tsconfig.es.tsbuildinfo",
+    "noEmit": false,
+    "plugins": [
+      {
+        "transform": "@magic-works/ttypescript-browser-like-import-transformer",
+        "before": true,
+        "bareModuleRewrite": {
+          "/(.+)/": {
+            "type": "umd",
+            "target": "__deps__",
+            "treeshake": {
+              "out": "./__deps__es__generated__.js"
+            }
+          }
+        }
+      }
+    ]
+  },
+  "include": ["./src/background-script.ts", "./src/content-script.ts"]
+}

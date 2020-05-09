@@ -1,0 +1,25 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "module": "System",
+    "outDir": "./system/",
+    "tsBuildInfoFile": "./tsconfig.system.tsbuildinfo",
+    "noEmit": false,
+    "plugins": [
+      {
+        "transform": "@magic-works/ttypescript-browser-like-import-transformer",
+        "before": true,
+        "bareModuleRewrite": {
+          "/(.+)/": {
+            "type": "umd",
+            "target": "__deps__",
+            "treeshake": {
+              "out": "./__deps__system__generated__.js"
+            }
+          }
+        }
+      }
+    ]
+  },
+  "include": ["./src/content-script.ts"]
+}
